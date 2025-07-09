@@ -19,7 +19,7 @@
         }
 
         .corona-background {
-            background-image: url('{{ asset('images/corona-triunfal.svg') }} '); 
+            background-image: url('{{ asset('images/corona_triunfal.svg') }} '); 
             background-size: 55rem 55rem;
             background-repeat: no-repeat;
             background-position: center;
@@ -53,17 +53,17 @@
 
             <!-- Logo FESC (superior izquierda) -->
             <div class="absolute top-20 lg:left-[10rem] sm:left-14 z-50">
-                <img src="{{ asset('images/Logo_of_FESC_University.svg.png') }}" alt="Logo FESC" class="lg:w-48 sm:w-32 h-auto drop-shadow-lg">
+                <img src="{{ asset('images/Logo_FESC.png') }}" alt="Logo FESC" class="lg:w-48 sm:w-32 h-auto">
             </div>
 
             <!-- Logo Proyectando (superior derecha) -->
-            <div class="absolute top-[65px] lg:right-[10rem] sm:right-14 z-50">
-                <img src="{{ asset('images/unnamed.png') }}" alt="Logo Proyectando" class="lg:w-36 sm:w-28 h-auto drop-shadow-lg">
+            <div class="absolute top-[75px] lg:right-[10rem] sm:right-14 z-50">
+                <img src="{{ asset('images/logo_Proyectando_2025.png') }}" alt="Logo Proyectando" class="lg:w-36 sm:w-28 h-auto">
             </div>
 
             <!-- Logo MinEducacion lateral izquierdo -->
             <div class="absolute -left-12 top-1/2 transform -translate-y-1/2 -rotate-90 z-50">
-                <img src="{{ asset('images/1750889371716.png') }}" alt="" class="h-auto w-32">
+                <img src="{{ asset('images/Logo_MINEDUCACION.png') }}" alt="" class="h-auto w-32">
             </div>
 
             <!-- Contenido principal -->
@@ -106,7 +106,7 @@
                                                 
                                                 <!-- Medalla de participación -->
                                                 <div class="absolute lg:-bottom-28 lg:left-[22rem] sm:left-[12rem] sm:-bottom-60" >
-                                                    <img src="images/1750794047513.png" alt="" class="w-48 h-auto ">
+                                                    <img src="{{ asset('images/medalla.png') }}" alt="" class="w-48 h-auto ">
                                                 </div>
 
                                                 <!-- Texto de Firma -->
