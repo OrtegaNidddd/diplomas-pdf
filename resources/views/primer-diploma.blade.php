@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diploma FESC</title>
     <!-- Scripts -->
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    @vite('resources/css/app.css')
+
     <style>
         
         @font-face {
@@ -99,7 +101,7 @@
                                         <span class="absolute top-44 left-1/2 transform -translate-x-1/2 lg:text-xl text-gray-600">Otorgado a:</span>
                                         
                                         <!-- Nombre centrado dinámicamente -->
-                                        <h1 class="absolute top-60 left-1/2 transform -translate-x-1/2 lg:text-5xl sm:text-[2.5rem] border-b-2 border-gray-500 font-cursive whitespace-nowrap">{{ $users->name }}</h1>
+                                        <h1 class="absolute top-60 left-1/2 transform -translate-x-1/2 lg:text-5xl sm:text-[2.5rem] border-b-2 border-gray-500 font-cursive whitespace-nowrap">{{ $datos['name'] }}</h1>
                                         
                                         <!-- Texto de participación centrado -->
                                         <span class="lg:w-[70%]  sm:w-[80%] absolute lg:top-[19rem] sm:top-[21rem] left-1/2 transform -translate-x-1/2  text-center sm:mt-10">Por su participación en el V Congreso Internacional Proyectando: Impulsando el desarrollo turístico y productivo de Norte de Santander, a través de la educación superior.</span>
