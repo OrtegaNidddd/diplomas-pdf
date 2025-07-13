@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DiplomaController;
-use App\Http\Controllers\PdfController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,9 +22,6 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::get('/pdf/{id}', [PdfController::class, 'generatePdf']);
 
 Route::get('/primer-diploma/{id}', [DiplomaController::class, 'show'])->name('primer-diploma');
 
