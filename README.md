@@ -89,7 +89,6 @@ Ejemplo: `localhost:8000/primer-diploma/1`
 
 ```
 Route::get('/generate-primer-diploma/{id}', [PdfController::class, 'generatePrimerDiploma'])->name('generate-primer-diploma');
-
 ```
 Ejemplo: `localhost:8000/generate-primer-diploma/1`
 ## 👁️ Vista Blade del Diploma (`resources/views/diploma.blade.php`)
@@ -161,17 +160,3 @@ Todas estas deben estar ubicadas en:
 | `.imagen-firma`              | Imagen escaneada de la firma. |
 | `.contenedor-firma`          | Nombre y cargo de la persona firmante. |
 
-# 🧾 Generación de Diplomas en PDF (Laravel + CSS + Blade)
-
-Este archivo documenta el uso de un proyecto para generar diplomas en PDF utilizando herramientas como **Dompdf** en Laravel.  
-La plantilla está pensada para ser elegante, funcional y adaptada a impresión o descarga digital.
-
----
-
-## 📌 Recomendaciones Generales
-
-- Las imágenes deben ubicarse en `public/images/`.
-- Para el PDF usa `public_path('images/...')`. Si es uso web, cambia a `asset('images/...')`.
-- Utilizar imágenes `.webp` para mejor compresión y nitidez.
-- Tipografías utilizadas: `Arial` y `Times New Roman`.
-- Formato de página: `Letter` en `landscape`.
