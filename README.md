@@ -1,66 +1,178 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🧾 Generación de Diplomas en PDF (Laravel + CSS + Blade)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este archivo documenta el uso de un proyecto para generar diplomas en PDF utilizando herramientas como **Dompdf** en Laravel.  
+La plantilla está pensada para ser elegante, funcional y adaptada a impresión o descarga digital.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📌 Recomendaciones Generales
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Las imágenes deben ubicarse en `public/images/`.
+- Para el PDF usa `public_path('images/...')`. Si es uso web, cambia a `asset('images/...')`.
+- Utilizar imágenes `.webp` para mejor compresión y nitidez.
+- Tipografías utilizadas: `Arial` y `Times New Roman`.
+- Formato de página: `Letter` en `landscape`.
+## Instalaciones Requeridas
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### Laravel-dompdf
+```
+composer require barryvdh/laravel-dompdf
+```
+[Documentación de Laravel-dompdf](https://github.com/barryvdh/laravel-dompdf)
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Controladores
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Ejemplo de uso controlador de vista Blade
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Se obtiene el usuario según su ID
+- Uso del modelo User
+- Retorna la vista del diploma con los datos del usuario
+```VistaDiplomaController
+public function show($id){
 
-## Laravel Sponsors
+    $user = \App\Models\User::findOrFail($id);
+    
+    return view('primer-diploma', compact('user'));
+} 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```
+### Ejemplo de uso del controlador para generar PDF
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Aqui se ajustan el tamaño y la orientación del PDF.
+                'Letter' es un tamaño de papel Carta,
+                'landscape' es la orientación del papel. (Horizontal)
 
-## Contributing
+Se pueden utilizar otros tamaños y orientaciones como:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- 'A4', 'A3', 'Legal', etc.
+- Legal: 8.5 x 14 pulgadas - (Oficio)
+- A4: 8.27 x 11.69 pulgadas
+- A3: 11.69 x 16.54 pulgadas
+- 'portrait' para orientación vertical.
 
-## Code of Conduct
+---
+- `return $pdf->download($filename);` descarga directamente el archivo PDF
+- `return $pdf->stream($filename); ` muestra el PDF en el navegador 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```PdfController
+public function generatePrimerDiploma($id)
+    {
+        try {
+            $user = \App\Models\User::findOrFail($id);
+            
+            $pdf = Pdf::loadView('primer-diploma', compact('user'));
+            
+            $cleanName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $user->name);
 
-## Security Vulnerabilities
+            $filename = 'diploma_' . $cleanName . '.pdf';
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+            $pdf->setPaper('Letter', 'landscape');
+            
+                return $pdf->download($filename);
 
-## License
+            // return $pdf->stream($filename);
+            
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al generar el diploma'], 500);
+        }
+    }
+```
+## Rutas
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Ruta para vista del diploma
+```
+Route::get('/primer-diploma/{id}', [DiplomaController::class, 'show'])->name('primer-diploma');
+```
+Ejemplo: `localhost:8000/primer-diploma/1`
+#### Ruta para generar PDF
+
+```
+Route::get('/generate-primer-diploma/{id}', [PdfController::class, 'generatePrimerDiploma'])->name('generate-primer-diploma');
+
+```
+Ejemplo: `localhost:8000/generate-primer-diploma/1`
+## 👁️ Vista Blade del Diploma (`resources/views/diploma.blade.php`)
+
+Esta vista se encarga de renderizar un diploma en formato HTML, preparado para convertir a PDF mediante herramientas como **Dompdf**.
+
+### 📂 Ubicación sugerida
+
+`resources/views/diploma.blade.php`
+
+### ⚙️ Dinamismo
+
+Utiliza interpolación de variables de Laravel para mostrar información dinámica del usuario:
+
+```blade
+{{ $user->name }}
+{{ $user->documento_identidad }}
+```
+
+### Estructura General
+ 
+| Sección                       | Descripción                                               |
+| ----------------------------- | --------------------------------------------------------- |
+| `body > .principal-container` | Contenedor principal que cubre toda la vista.             |
+| `.contenedor-diploma`         | Sección envolvente del diploma completo.                  |
+| Esquinas decorativas          | Cuatro imágenes en cada esquina que enmarcan el diploma.  |
+| Logos institucionales         | Logotipos de la FESC y el Ministerio de Educación.        |
+| `.contenido-principal`        | Área central del diploma donde se ubican los textos.      |
+| `.contenido-diploma`          | Contenedor específico de contenido textual.               |
+| Firma                         | Imagen escaneada de la firma y el texto con nombre/cargo. |
+
+### Recursos gráficos
+| Imagen                     | Propósito                   |
+| -------------------------- | --------------------------- |
+| `Right-top-corner.webp`    | Esquina superior derecha    |
+| `Left-top-corner.webp`     | Esquina superior izquierda  |
+| `Bottom-right-corner.webp` | Esquina inferior derecha    |
+| `Bottom-left-corner.webp`  | Esquina inferior izquierda  |
+| `LOGO_PROYECTANDO.webp`    | Logo de la FESC y proyecto  |
+| `firma_ejemplo.png`        | Firma digital de la rectora |
+
+Todas estas deben estar ubicadas en:
+
+`public/images/`
+---
+
+## 🎨 Clases CSS y Finalidad
+
+| Clase                         | Descripción |
+|------------------------------|-------------|
+| `.font-sans`                 | Fuente sans-serif moderna (`Arial`). |
+| `.font-serif`                | Fuente con serifas tradicional (`Times`). |
+| `.h-full`                    | Ocupa el 100% de la altura disponible. |
+| `.principal-container`       | Contenedor principal del diploma. |
+| `.contenedor-diploma`        | Estructura donde se renderiza todo. |
+| `.esquina-*`                 | Posiciona esquinas decorativas. |
+| `.logo-fesc-proyectando`     | Centra el logo superior de la FESC. |
+| `.logo-mineducacion`         | Posiciona lateralmente el logo de MinEducación. |
+| `.contenido-principal`       | Agrupa todo el contenido visible del diploma. |
+| `.contenido-diploma`         | Sección que contiene textos y firma. |
+| `.titulo-principal`          | Título del diploma. |
+| `.certifican`                | Texto introductorio: “Certifican que…”. |
+| `.nombre`                    | Nombre del participante. |
+| `.documento`                 | Documento del participante. |
+| `.asistio`                   | Introducción al evento. |
+| `.nombre-evento`             | Nombre destacado del evento. |
+| `.participacion`             | Lema o frase institucional. |
+| `.fecha-realizacion`         | Fechas del evento y firma. |
+| `.imagen-firma`              | Imagen escaneada de la firma. |
+| `.contenedor-firma`          | Nombre y cargo de la persona firmante. |
+
+# 🧾 Generación de Diplomas en PDF (Laravel + CSS + Blade)
+
+Este archivo documenta el uso de un proyecto para generar diplomas en PDF utilizando herramientas como **Dompdf** en Laravel.  
+La plantilla está pensada para ser elegante, funcional y adaptada a impresión o descarga digital.
+
+---
+
+## 📌 Recomendaciones Generales
+
+- Las imágenes deben ubicarse en `public/images/`.
+- Para el PDF usa `public_path('images/...')`. Si es uso web, cambia a `asset('images/...')`.
+- Utilizar imágenes `.webp` para mejor compresión y nitidez.
+- Tipografías utilizadas: `Arial` y `Times New Roman`.
+- Formato de página: `Letter` en `landscape`.
