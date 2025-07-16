@@ -160,3 +160,11 @@ Todas estas deben estar ubicadas en:
 | `.imagen-firma`              | Imagen escaneada de la firma. |
 | `.contenedor-firma`          | Nombre y cargo de la persona firmante. |
 
+## Autor
+- Nick Ortega [OrtegaNidddd](https://github.com/OrtegaNidddd)
+
+## Colaboradores
+- Ing. Manuel Parada [CodeAlchemist151](https://github.com/CodeAlchemist151)
+
+## PDF GENERADO DINÁMICAMENTE
+<img width="767" height="591" alt="image" src="https://github.com/user-attachments/assets/15c3015a-024f-4f5d-9edd-8eb8a22de97e" />
