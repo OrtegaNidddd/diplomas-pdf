@@ -15,7 +15,7 @@
 
         /* Define el tamaño de la hoja en orientación horizontal legal para PDF */
         @page {
-            size: legal landscape;
+            size: letter landscape;
             margin: 0;
         }
 
