@@ -35,7 +35,6 @@ public function show($id){
     
     return view('primer-diploma', compact('user'));
 } 
-
 ```
 ### Ejemplo de uso del controlador para generar PDF
 
