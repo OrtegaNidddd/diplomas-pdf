@@ -31,7 +31,7 @@
                                         <td class="px-4 py-2 border border-gray-400 dark:border-gray-600">{{ $user->email }}</td>
                                         <td class="px-4 py-3 border border-gray-400 dark:border-gray-600 text-center">
                                             <a href="{{ route('generate-primer-diploma', ['id' => $user->id]) }}" 
-                                            class="bg-gray-700 text-white p-2 rounded-2xl text-sm py-2 px-4" 
+                                            class="bg-gray-700 text-white p-2 rounded-2xl text-sm py-2 px-4 hover:bg-gray-950 ease-in-out duration-300" 
                                             target="_blank">
                                                 Descargar
                                             </a>
