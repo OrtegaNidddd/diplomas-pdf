@@ -406,17 +406,17 @@
 
             <!-- Fondo del diploma esquina inferior izquierda -->
             <div class="fondo-inferior-izquierda">
-                <img src="{{ public_path('images/EJE-01.png') }}">
+                <img src="{{ public_path('images/EJE-01.webp') }}">
             </div>
 
             <!-- Fondo del diploma esquina inferior derecha -->
             <div class="fondo-inferior-derecha">
-                <img src="{{ public_path('images/EJE-02.png') }}">
+                <img src="{{ public_path('images/EJE-02_1.webp') }}">
             </div>
 
             <!-- Fondo del diploma esquina superior derecha -->
             <div class="fondo-superior-derecha">
-                <img src="{{ public_path('images/EJE-03.png') }}">
+                <img src="{{ public_path('images/EJE-03_1.webp') }}">
             </div>
             <!-- *************************************************************************************** -->
 
@@ -429,7 +429,7 @@
 
             <!-- Logo MinEducacion lateral izquierdo -->
             <div class="logo-mineducacion">
-                <img src="{{ public_path('images/LOGO_MINEDUCACION.png') }}" alt="Logo FESC y Proyectando">
+                <img src="{{ public_path('images/LOGO_MINEDUCACION_1.webp') }}" alt="Logo FESC y Proyectando">
             </div>
 
             <!-- =========== Aqui finaliza el uso de los logos del diploma =========== -->
@@ -484,7 +484,7 @@
                     <!-- =========== Se inicia el contenedor ded uso de la firma en imagen =========== -->
                     <!-- Imagen de la firma -->
                     <div class="imagen-firma">
-                        <img src="{{ public_path('images/FIRMA_RECTORA.png') }}" alt="Firma" class="firma">
+                        <img src="{{ public_path('images/FIRMA_RECTORA_1.webp') }}" alt="Firma" class="firma">
                     </div>
                     <!-- =========== Aqui finaliza el contendor de la imagen de la firma =========== -->
                     
