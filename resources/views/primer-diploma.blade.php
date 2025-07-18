@@ -13,9 +13,14 @@
             Se recomienda usar imágenes .webp para mejor compresión y calidad.
         */
 
-        /* Define el tamaño de la hoja en orientación horizontal legal para PDF */
+        /* Define el tamaño de la hoja y orientación horizontal para el PDF */
         @page {
+            /*Para ajustarlo a tamaño carta */
             size: letter landscape;
+
+            /* Para ajustarlo a tamaño oficio*/
+            /*size: legal landscape;*/
+
             margin: 0;
         }
 
@@ -117,20 +122,54 @@
         .logo-mineducacion {
             position: absolute;
             top: 25%;
-            left: -2rem;
+            left: -3rem;
             transform: translateY(-50%) rotate(-90deg);
             z-index: 50;
         }
 
-        /* Estilo para el texto dentro del logo del ministerio */
-        .logo-mineducacion span {
-            border-top: 2px solid #374151;
-            border-bottom: 2px solid #374151;
-            font-size: 7px;
-            color: #374151;
-            padding: 2px 0;
-            font-weight: bold;
-            letter-spacing: 1px;
+        .logo-mineducacion img {
+            width: 10rem;
+        }
+
+        /* -------------------------
+        Fondos decorativos
+        -------------------------- */
+
+        /* Fondo del diploma esquina inferior izquierda */
+        .fondo-inferior-izquierda {
+            position: absolute;
+            bottom: -3.5rem;
+            left: -4.5rem;
+            z-index: 10;
+        }
+
+        .fondo-inferior-izquierda img{
+            width: 15rem;
+        }
+
+        /* Fondo del diploma esquina inferior derecha */
+        .fondo-inferior-derecha {
+            position: absolute;
+            bottom: -10rem;
+            right: 3rem;
+            z-index: 10;
+        }
+
+        .fondo-inferior-derecha img{
+            width: 15rem;
+            transform: rotate(-30deg);
+        }
+
+        /* Fondo del diploma esquina superior derecha */
+        .fondo-superior-derecha {
+            position: absolute;
+            top: 5rem;
+            right: -7.5rem;
+            z-index: 10;
+        }
+
+        .fondo-superior-derecha img{
+            width: 15rem;
         }
 
         /* -------------------------
@@ -305,7 +344,7 @@
         /* Imagen de firma escaneada */
         .imagen-firma {
             position: absolute;
-            top: 39rem;
+            top: 34rem;
             left: 50%;
             transform: translateX(-50%);
             z-index: 50;
@@ -313,7 +352,7 @@
 
         /* Tamaño de la imagen de firma */
         .firma {
-            width: 13rem;
+            width: 15rem;
             height: auto;
         }
 
@@ -363,6 +402,24 @@
 
             <!-- *************************************************************************************** -->
 
+            <!-- =========== Aqui inicia el uso de la imagenes de fondo del diploma =========== -->
+
+            <!-- Fondo del diploma esquina inferior izquierda -->
+            <div class="fondo-inferior-izquierda">
+                <img src="{{ public_path('images/EJE-01.png') }}">
+            </div>
+
+            <!-- Fondo del diploma esquina inferior derecha -->
+            <div class="fondo-inferior-derecha">
+                <img src="{{ public_path('images/EJE-02.png') }}">
+            </div>
+
+            <!-- Fondo del diploma esquina superior derecha -->
+            <div class="fondo-superior-derecha">
+                <img src="{{ public_path('images/EJE-03.png') }}">
+            </div>
+            <!-- *************************************************************************************** -->
+
             <!-- =========== Aqui inicia el uso de los logos del diploma =========== -->
 
             <!-- Logo FESC & PROYECTANDO -->
@@ -372,7 +429,7 @@
 
             <!-- Logo MinEducacion lateral izquierdo -->
             <div class="logo-mineducacion">
-                <span>VIGILADA MINEDUCACIÓN</span>
+                <img src="{{ public_path('images/LOGO_MINEDUCACION.png') }}" alt="Logo FESC y Proyectando">
             </div>
 
             <!-- =========== Aqui finaliza el uso de los logos del diploma =========== -->
@@ -427,7 +484,7 @@
                     <!-- =========== Se inicia el contenedor ded uso de la firma en imagen =========== -->
                     <!-- Imagen de la firma -->
                     <div class="imagen-firma">
-                        <img src="{{ public_path('images/firma_ejemplo.png') }}" alt="Firma" class="firma">
+                        <img src="{{ public_path('images/FIRMA_RECTORA.png') }}" alt="Firma" class="firma">
                     </div>
                     <!-- =========== Aqui finaliza el contendor de la imagen de la firma =========== -->
                     

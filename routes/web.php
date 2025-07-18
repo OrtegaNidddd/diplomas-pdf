@@ -19,9 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\TablaController::class, 'index'])->name('dashboard');
+
 
 // Se hace uso del controlador DiplomaController para mostrar el diploma en vista dinamica blade
 // Ejemplo de URL: localhost:8000/primer-diploma/1

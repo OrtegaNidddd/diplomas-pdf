@@ -40,8 +40,14 @@ class PdfController extends Controller
                 - A3: 11.69 x 16.54 pulgadas
                 'portrait' para orientación vertical.
             */
+
+            // Para ajustarlo a tamaño carta
             $pdf->setPaper('Letter', 'landscape');
-            
+
+            // Para ajustarlo a tamaño oficio
+            // $pdf->setPaper('Legal', 'landscape');
+
+
             /*
                 - Download descarga directamente el archivo PDF
                 - Stream muestra el PDF en el navegador 
@@ -49,9 +55,10 @@ class PdfController extends Controller
                 Se deja comentado el método stream para que se pueda utilizar si se desea mostrar el PDF en el navegador.
             */
 
-                return $pdf->download($filename);
+            
+            // return $pdf->download($filename);
 
-            // return $pdf->stream($filename);
+            return $pdf->stream($filename);
             
         } catch (\Exception $e) {
             // Manejo de errores, en caso de que ocurra un problema al generar el PDF
